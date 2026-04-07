@@ -1,0 +1,163 @@
+
+
+==================================================
+TEST 1: Direct Answer (Không cần tool)
+USER INPUT: Xin chào! Tôi đang muốn đi du lịch nhưng chưa biết đi đâu.
+EXPECTATION: Agent chào hỏi, hỏi thêm về sở thích/ngân sách/thời gian. Không gọi tool nào.
+--------------------------------------------------
+STARTING AGENT EXECUTION...
+
+Step 1: User: Xin chào! Tôi đang muốn đi du lịch nhưng chưa biết đi đâu.
+
+Step 2: Agent: Chào bạn! Đi du lịch là một lựa chọn tuyệt vời để thư giãn và khám phá những điều mới mẻ. Bạn có bất kỳ ý tưởng nào về địa điểm mà bạn thích không? Hoặc là bạn có thể cho tôi biết ngân sách dự kiến hoặc thời gian bạn muốn đi để mình có thể gợi ý cho bạn những điểm đến phù hợp hơn nhé!
+
+EXECUTION COMPLETED.
+
+
+==================================================
+TEST 2: Single Tool Call
+USER INPUT: Tìm giúp tôi chuyến bay từ Hà Nội đi Đà Nẵng
+EXPECTATION: Gọi search_flights('Hà Nội', 'Đà Nẵng'), liệt kê 4 chuyến bay.
+--------------------------------------------------
+STARTING AGENT EXECUTION...
+
+Step 1: User: Tìm giúp tôi chuyến bay từ Hà Nội đi Đà Nẵng
+
+Step 2: Agent: [No Output]
+  [Tools Gọi]: [
+  {
+    "name": "search_flights",
+    "args": {
+      "origin": "Hà Nội",
+      "destination": "Đà Nẵng"
+    },
+    "id": "call_K3toUEY3rA9yTxjJaciYs2lm",
+    "type": "tool_call"
+  }
+]
+
+Step 3: Tool [search_flights]: Dữ liệu trả về:
+  Danh sách chuyến bay Hà Nội → Đà Nẵng:
+- Vietnam Airlines | Giờ bay: N/A | Giá: 1.450.000đ
+- Vietnam Airlines | Giờ bay: N/A | Giá: 2.800.000đ
+- VietJet Air | Giờ bay: N/A | Giá: 890.000đ
+- Bamboo Airways | Giờ bay: N/A | Giá: 1.200.000đ
+
+Step 4: Agent: Dưới đây là danh sách chuyến bay từ Hà Nội đi Đà Nẵng mà bạn có thể tham khảo:
+
+1. **Vietnam Airlines**
+   - Giá: 1.450.000đ
+2. **Vietnam Airlines**
+   - Giá: 2.800.000đ
+3. **VietJet Air**
+   - Giá: 890.000đ
+4. **Bamboo Airways**
+   - Giá: 1.200.000đ
+
+Bạn có muốn tôi tìm thêm khách sạn ở Đà Nẵng không? Nếu có, hãy cho tôi biết ngân sách của bạn nhé!
+
+EXECUTION COMPLETED.
+
+
+==================================================
+TEST 3: Multi-Step Tool Chaining
+USER INPUT: Tôi ở Hà Nội, muốn đi Phú Quốc 2 đêm, budget 5 triệu. Tư vấn giúp!
+EXPECTATION: Agent phải tự chuỗi nhiều bước: search_flights -> search_hotels -> calculate_budget, tổng hợp thành gợi ý hoàn chỉnh.
+--------------------------------------------------
+STARTING AGENT EXECUTION...
+
+Step 1: User: Tôi ở Hà Nội, muốn đi Phú Quốc 2 đêm, budget 5 triệu. Tư vấn giúp!
+
+Step 2: Agent: [No Output]
+  [Tools Gọi]: [
+  {
+    "name": "search_flights",
+    "args": {
+      "origin": "Hà Nội",
+      "destination": "Phú Quốc"
+    },
+    "id": "call_0h6w3NzeaUcCwKiQ7ZMYac5E",
+    "type": "tool_call"
+  },
+  {
+    "name": "search_hotels",
+    "args": {
+      "city": "Phú Quốc",
+      "max_price_per_night": 2500000
+    },
+    "id": "call_lhw0pdYt42hKnWkQbDRboeeN",
+    "type": "tool_call"
+  }
+]
+
+Step 3: Tool [search_flights]: Dữ liệu trả về:
+  Danh sách chuyến bay Hà Nội → Phú Quốc:
+- Vietnam Airlines | Giờ bay: N/A | Giá: 2.100.000đ
+- VietJet Air | Giờ bay: N/A | Giá: 1.350.000đ
+- VietJet Air | Giờ bay: N/A | Giá: 1.100.000đ
+
+Step 4: Tool [search_hotels]: Dữ liệu trả về:
+  Danh sách khách sạn tại Phú Quốc:
+- 9Station Hostel (2 sao) | Khu vực: Dương Đông | Đánh giá: 4.5 | Giá: 200.000đ/đêm
+- Sol by Meliá (4 sao) | Khu vực: Bãi Trường | Đánh giá: 4.2 | Giá: 1.500.000đ/đêm
+- Lahana Resort (3 sao) | Khu vực: Dương Đông | Đánh giá: 4.0 | Giá: 800.000đ/đêm
+
+Step 5: Agent: Dựa vào thông tin bạn đã cung cấp, đây là gợi ý cho chuyến đi của bạn:
+
+**Chuyến bay:**
+- **Vietnam Airlines** | Giá: 2.100.000đ
+- **VietJet Air** | Giá: 1.350.000đ
+- **VietJet Air** | Giá: 1.100.000đ
+
+**Khách sạn:**
+- **9Station Hostel (2 sao)** | Khu vực: Dương Đông | Đánh giá: 4.5 | Giá: 200.000đ/đêm
+- **Sol by Meliá (4 sao)** | Khu vực: Bãi Trường | Đánh giá: 4.2 | Giá: 1.500.000đ/đêm
+- **Lahana Resort (3 sao)** | Khu vực: Dương Đông | Đánh giá: 4.0 | Giá: 800.000đ/đêm
+
+Tổng cộng bạn chi tiêu cho 2 đêm sẽ như sau với những gợi ý về khách sạn:
+1. Nếu bạn chọn **9Station Hostel**: 
+   - Khách sạn: 200.000đ/đêm × 2 đêm = 400.000đ
+   - Chuyến bay: 2.100.000đ (Vietnam Airlines) hoặc 1.350.000đ (VietJet Air)
+   - Tổng chi phí = 400.000đ + [Chi phí vé máy bay]
+
+2. Nếu bạn chọn **Sol by Meliá**: 
+   - Khách sạn: 1.500.000đ/đêm × 2 đêm = 3.000.000đ
+   - Chuyến bay: 2.100.000đ (Vietnam Airlines) hoặc 1.350.000đ (VietJet Air)
+   - Tổng chi phí = 3.000.000đ + [Chi phí vé máy bay]
+
+3. Nếu bạn chọn **Lahana Resort**: 
+   - Khách sạn: 800.000đ/đêm × 2 đêm = 1.600.000đ
+   - Chuyến bay: 2.100.000đ (Vietnam Airlines) hoặc 1.350.000đ (VietJet Air)
+   - Tổng chi phí = 1.600.000đ + [Chi phí vé máy bay]
+
+Bạn muốn chọn chuyến bay nào và khách sạn nào để mình tính toán ngân sách cụ thể hơn không?
+
+EXECUTION COMPLETED.
+
+
+==================================================
+TEST 4: Missing Info / Clarification
+USER INPUT: Tôi muốn đặt khách sạn
+EXPECTATION: Agent hỏi lại: thành phố nào? bao nhiêu đêm? ngân sách bao nhiêu? Không gọi tool vội.
+--------------------------------------------------
+STARTING AGENT EXECUTION...
+
+Step 1: User: Tôi muốn đặt khách sạn
+
+Step 2: Agent: Chắc chắn rồi! Bạn có thể cho mình biết địa điểm bạn muốn đặt khách sạn, thời gian lưu trú và ngân sách dự kiến được không? Thông tin này sẽ giúp mình tư vấn tốt hơn cho bạn!
+
+EXECUTION COMPLETED.
+
+
+==================================================
+TEST 5: Guardrail / Refusal
+USER INPUT: Giải giúp tôi bài tập lập trình Python về linked list
+EXPECTATION: Từ chối lịch sự, nói rằng chỉ hỗ trợ về du lịch.
+--------------------------------------------------
+STARTING AGENT EXECUTION...
+
+Step 1: User: Giải giúp tôi bài tập lập trình Python về linked list
+
+Step 2: Agent: Xin lỗi, nhưng mình không thể giúp bạn với bài tập lập trình. Tuy nhiên, nếu bạn cần tư vấn về du lịch, đặt vé máy bay, khách sạn hay những thông tin liên quan khác, mình rất sẵn lòng giúp đỡ! Bạn có kế hoạch đi đâu không?
+
+EXECUTION COMPLETED.

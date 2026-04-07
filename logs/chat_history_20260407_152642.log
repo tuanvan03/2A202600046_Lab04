@@ -1,0 +1,53 @@
+=== START CHAT SESSION (07/04/2026 15:26:42) ===
+You: Chào bạn. Tôi muốn đi Phú Quốc, có những chuyến nào 
+ -> [Tool Called]: [{"name": "search_flights", "args": {"origin": "Hà Nội", "destination": "Phú Quốc"}}]
+TravelBuddy: Chào bạn! Dưới đây là danh sách chuyến bay từ Hà Nội đến Phú Quốc:
+
+- **Vietnam Airlines**: Giá vé khoảng **2.100.000đ**
+- **VietJet Air**: Giá vé khoảng **1.350.000đ**
+- **VietJet Air**: Giá vé khoảng **1.100.000đ**
+
+Bạn có đang có kế hoạch cụ thể về thời gian đi và ngân sách không? Nếu có, mình có thể giúp bạn tìm khách sạn và tính toán ngân sách cho chuyến đi!
+--------------------------------------------------
+You: Tôi đang có 5 triệu, đi chuyến VietJect Air 1.100.000đ được đấy. Tìm thêm cho tôi khách sạn ở với giá cả hợp lý đi 
+ -> [Tool Called]: [{"name": "search_flights", "args": {"origin": "Hà Nội", "destination": "Phú Quốc"}}]
+ -> [Tool Called]: [{"name": "search_hotels", "args": {"city": "Phú Quốc", "max_price_per_night": 1000000}}]
+ -> [Tool Called]: [{"name": "calculate_budget", "args": {"total_budget": 5000000, "expenses": "vé_máy_bay:1100000,khách_sạn:200000"}}]
+TravelBuddy: Dưới đây là một số khách sạn ở Phú Quốc mà bạn có thể tham khảo:
+
+1. **9Station Hostel (2 sao)**
+   - Khu vực: Dương Đông
+   - Đánh giá: 4.5
+   - Giá: **200.000đ/đêm**
+
+2. **Lahana Resort (3 sao)**
+   - Khu vực: Dương Đông
+   - Đánh giá: 4.0
+   - Giá: **800.000đ/đêm**
+
+Với chuyến bay VietJet Air giá **1.100.000đ** và khách sạn 9Station Hostel giá **200.000đ**, tổng chi phí cho chuyến đi của bạn sẽ là **1.300.000đ**. Từ ngân sách **5.000.000đ**, bạn còn lại **3.700.000đ** để chi tiêu cho ăn uống, tham quan và mua sắm.
+
+Có vẻ bạn đã có một kế hoạch rất tuyệt vời! Bạn muốn mình hỗ trợ thêm gì nữa không?
+--------------------------------------------------
+You: Lahana Resort có vẻ ổn đấy, tính tổng chi phí của tôi, và gợi ý thêm lộ trình nào nữa với số tiền còn dư 
+ -> [Tool Called]: [{"name": "search_flights", "args": {"origin": "Hà Nội", "destination": "Phú Quốc"}}]
+ -> [Tool Called]: [{"name": "search_hotels", "args": {"city": "Phú Quốc", "max_price_per_night": 1000000}}]
+ -> [Tool Called]: [{"name": "calculate_budget", "args": {"total_budget": 5000000, "expenses": "vé_máy_bay:1100000,khách_sạn:200000"}}]
+ -> [Tool Called]: [{"name": "calculate_budget", "args": {"total_budget": 5000000, "expenses": "vé_máy_bay:1100000,khách_sạn:800000"}}]
+TravelBuddy: Tuyệt vời! Với Lahana Resort có giá **800.000đ**, tổng chi phí cho chuyến đi của bạn sẽ là:
+
+- **Vé máy bay**: 1.100.000đ
+- **Khách sạn**: 800.000đ
+
+**Tổng chi phí**: **1.900.000đ**. 
+Từ ngân sách **5.000.000đ**, bạn còn lại **3.100.000đ**.
+
+### Gợi ý lộ trình với số tiền còn dư:
+1. **Tham quan Vinpearl Land Phú Quốc**: Giá vé khoảng 900.000đ/người.
+2. **Khám phá Dinh Cậu**: Miễn phí, nhưng bạn có thể chi cho đồ ăn vặt hoặc quà lưu niệm.
+3. **Đi tour khám phá các đảo**: Thường giá khoảng 1.500.000đ, bao gồm ăn trưa và hoạt động thể thao trên nước.
+4. **Thưởng thức hải sản tại các nhà hàng địa phương**: Từ 200.000đ đến 500.000đ một bữa.
+
+Với số tiền còn lại, bạn có thể lựa chọn tham gia tour hoặc trải nghiệm thêm các hoạt động tại đây mà không lo vượt ngân sách. Bạn cần thêm thông tin hoặc muốn đặt dịch vụ nào không?
+--------------------------------------------------
+=== END CHAT SESSION VIA KEYBOARD INTERRUPT ===
